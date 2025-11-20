@@ -6,9 +6,7 @@ plugins {
 group = "yourmod"
 version = "1.0.0"
 
-repositories {
-    mavenCentral()
-}
+repositories { mavenCentral() }
 
 dependencies {
     minecraft "com.mojang:minecraft:1.21.1"
@@ -17,16 +15,10 @@ dependencies {
     modImplementation "net.fabricmc.fabric-api:fabric-api:0.102.0+1.21.1"
 }
 
-java {
-    toolchain {
-        languageVersion = JavaLanguageVersion.of(17)
-    }
-}
+java { toolchain { languageVersion = JavaLanguageVersion.of(17) } }
 
 tasks.remapJar {
     archiveBaseName.set("fishing-sound-filter")
     archiveVersion.set("1.0.0")
-    destinationDirectory.set(file("$buildDir/libs")) // ← これが重要
+    destinationDirectory.set(file("$buildDir/libs"))  // ← ここ重要
 }
-
-
