@@ -23,14 +23,14 @@ java {
     }
 }
 
-tasks.jar {
-    // JAR 名を固定
-    archiveBaseName.set("fishing-sound-filter")
-    archiveVersion.set("1.0.0")
+tasks.remapJar {
+    destinationDirectory.set(file("$buildDir/libs"))  // build/libs に出力
 }
+
 
 tasks.remapJar {
     // remapJar で出力される JAR 名
     archiveBaseName.set("fishing-sound-filter")
     archiveVersion.set("1.0.0")
 }
+
