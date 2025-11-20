@@ -1,8 +1,0 @@
-{
-  "required": true,
-  "package": "yourmod.mixin",
-  "compatibilityLevel": "JAVA_17",
-  "client": [
-    "ClientPlayNetworkHandlerMixin"
-  ]
-}
