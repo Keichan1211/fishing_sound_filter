@@ -24,13 +24,9 @@ java {
 }
 
 tasks.remapJar {
-    destinationDirectory.set(file("$buildDir/libs"))  // build/libs に出力
-}
-
-
-tasks.remapJar {
-    // remapJar で出力される JAR 名
     archiveBaseName.set("fishing-sound-filter")
     archiveVersion.set("1.0.0")
+    destinationDirectory.set(file("$buildDir/libs")) // ← これが重要
 }
+
 
