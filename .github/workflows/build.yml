@@ -3,8 +3,6 @@ name: build
 on:
   push:
     branches: [ "main" ]
-  pull_request:
-    branches: [ "main" ]
 
 jobs:
   build:
@@ -23,7 +21,7 @@ jobs:
         run: chmod +x ./gradlew
 
       - name: Build with Gradle
-        run: ./gradlew build remapJar
+        run: ./gradlew build remapJar   # ← ここがビルド実行
 
       - name: Upload Artifact
         uses: actions/upload-artifact@v4
