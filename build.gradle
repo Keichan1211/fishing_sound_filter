@@ -27,6 +27,8 @@ tasks.remapJar {
     destinationDirectory.set(file("$buildDir/libs"))
 }
 
+
 tasks.build {
     dependsOn tasks.remapJar
 }
+
