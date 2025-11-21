@@ -1,41 +1,32 @@
 plugins {
-    id 'fabric-loom' version '1.9.+'
-    id 'java'
+    id 'fabric-loom' version '1.6-SNAPSHOT'
+    id 'maven-publish'
 }
 
-group = 'yourmod'
-version = '1.0.0'
+sourceCompatibility = JavaVersion.VERSION_21
+targetCompatibility = JavaVersion.VERSION_21
 
-java {
-    toolchain {
-        languageVersion = JavaLanguageVersion.of(21)
-    }
-}
+archivesBaseName = "fishing-sound-filter"
+version = "1.0.0"
+group = "yourmod"
 
 repositories {
     mavenCentral()
-    maven {
-        name = "Fabric"
-        url = "https://maven.fabricmc.net/"
-    }
+    maven { url "https://maven.fabricmc.net/" }
 }
 
 dependencies {
     minecraft "com.mojang:minecraft:1.21.1"
     mappings "net.fabricmc:yarn:1.21.1+build.1:v2"
-    modImplementation "net.fabricmc:fabric-loader:0.15.11"
-}
-
-loom {
-    splitEnvironmentSourceSets()
-}
-
-tasks.withType(JavaCompile).configureEach {
-    options.encoding = "UTF-8"
+    modImplementation "net.fabricmc:fabric-loader:0.15.7"
 }
 
 tasks.remapJar {
     archiveBaseName.set("fishing-sound-filter")
     archiveVersion.set("1.0.0")
     destinationDirectory.set(file("$buildDir/libs"))
+}
+
+tasks.build {
+    dependsOn tasks.remapJar
 }
