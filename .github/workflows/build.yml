@@ -1,32 +1,33 @@
-plugins {
-    id 'fabric-loom' version '1.6-SNAPSHOT'
-    id 'maven-publish'
-}
+name: build
 
-sourceCompatibility = JavaVersion.VERSION_21
-targetCompatibility = JavaVersion.VERSION_21
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
 
-archivesBaseName = "fishing-sound-filter"
-version = "1.0.0"
-group = "yourmod"
+jobs:
+  build:
+    runs-on: ubuntu-latest
 
-repositories {
-    mavenCentral()
-    maven { url "https://maven.fabricmc.net/" }
-}
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
 
-dependencies {
-    minecraft "com.mojang:minecraft:1.21.1"
-    mappings "net.fabricmc:yarn:1.21.1+build.1:v2"
-    modImplementation "net.fabricmc:fabric-loader:0.15.7"
-}
+    - name: Set up Java
+      uses: actions/setup-java@v4
+      with:
+        distribution: temurin
+        java-version: 17
 
-tasks.remapJar {
-    archiveBaseName.set("fishing-sound-filter")
-    archiveVersion.set("1.0.0")
-    destinationDirectory.set(file("$buildDir/libs"))
-}
+    - name: Make gradlew executable
+      run: chmod +x ./gradlew
 
-tasks.build {
-    dependsOn tasks.remapJar
-}
+    - name: Build with Gradle
+      run: ./gradlew build remapJar
+
+    - name: Upload Artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: fishing-sound-filter
+        path: build/libs/fishing-sound-filter-1.0.0.jar
